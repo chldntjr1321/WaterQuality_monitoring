@@ -8,9 +8,10 @@ import Search from './Search';
 function App() {
   let [searchInput, setSearchInput] = useState('');
   const handleSearchClick = () => {
+    const serviceKey = import.meta.env.VITE_WATER_API_KEY;
     axios
       .get(
-        'http://apis.data.go.kr/B500001/myportal/dictionary/dictionarylist?searchNm=%EA%B0%95%EC%88%98%EB%9F%89&numOfRows=10&pageNo=1&serviceKey=IXPiDICNoweAadzYxfFl5DSMrgRYBqWZ1n3r%2B5%2BR0ZUixnveIHWUYbKrgQKBnw2ARc4JQ%2BY2cMKZ8Ah3xld0UA%3D%3D'
+        `http://apis.data.go.kr/B500001/myportal/dictionary/dictionarylist?searchNm=%EA%B0%95%EC%88%98%EB%9F%89&numOfRows=10&pageNo=1&serviceKey=${serviceKey}`
       )
       .then((result) => {
         const itemList = result.data.response.body.items.item;
