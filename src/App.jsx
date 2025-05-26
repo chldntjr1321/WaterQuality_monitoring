@@ -17,13 +17,23 @@ function App() {
         const itemList = result.data.response.body.items.item;
         console.log('검색어 : ', searchInput);
         console.log('뜻 : ', itemList[0].explain); //기본 값은 가강수량의 뜻 : 단위면적당 연직기주 내의 수증기 총량으로 강수 가능한 최대 수분량
+        // 로컬스토리지에서 기존 목록 불러오기
+        let historyList = localStorage.getItem('list');
+        historyList = historyList ? JSON.parse(historyList) : [];
+
+        // 중복 제거 및 추가
+        if (!historyList.includes(searchInput)) {
+          historyList.push(searchInput);
+          localStorage.setItem('list', JSON.stringify(historyList));
+        }
+
+        setSearchResult(searchInput);
         setSearchInput('');
       })
       .catch((error) => {
         console.log('실패함');
         console.log(error);
       });
-    setSearchResult(searchInput);
   };
   let [searchResult, setSearchResult] = useState('');
 
