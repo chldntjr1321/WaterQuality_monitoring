@@ -21,8 +21,8 @@ body {
 
 .carousel,
 .carousel-inner {
-  width: 70vw;
-  height: 600px;
+  width: 80vw;
+  height: 500px;
   max-width: 100%;
   margin: 0 auto;
   background-size: cover;
@@ -42,9 +42,6 @@ body {
   opacity: 1;
   z-index: 1;
 }
-.captiontext {
-  color: black;
-}
 .carousel-img {
   width: 100%;
   height: 100%;
@@ -55,4 +52,25 @@ body {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 10px;
+}
+.recent__title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+.recent__list {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 80vw;
+  height: 50px;
+  /* background: orange; */
+  display: flex;
+  padding: 5px;
+  word-break: break-all;
+  font-size: 20px;
+  font-weight: 600;
+}
+.recentbtn {
+  margin-left: 12px;
 }

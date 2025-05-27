@@ -1,13 +1,14 @@
 import axios from 'axios';
 import { Navbar, Form, Button, Row, Col, InputGroup } from 'react-bootstrap';
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CarouselFade from './Banner';
 import Search from './Search';
 
 function App() {
   let [searchInput, setSearchInput] = useState('');
   const handleSearchClick = () => {
+    if (!searchInput.trim()) return; //공백 입력하면 무시하고 스토리지에 값 저장하지 않기
     const serviceKey = import.meta.env.VITE_WATER_API_KEY;
     axios
       .get(
@@ -20,13 +21,14 @@ function App() {
         // 로컬스토리지에서 기존 목록 불러오기
         let historyList = localStorage.getItem('list');
         historyList = historyList ? JSON.parse(historyList) : [];
+        setSearchResult(historyList);
 
         // 중복 제거 및 추가
         if (!historyList.includes(searchInput)) {
           historyList.push(searchInput);
           localStorage.setItem('list', JSON.stringify(historyList));
+          setSearchResult(historyList);
         }
-        setSearchResult(searchInput);
         setSearchInput('');
       })
       .catch((error) => {
@@ -34,7 +36,14 @@ function App() {
         console.log(error);
       });
   };
-  let [searchResult, setSearchResult] = useState('');
+  let [searchResult, setSearchResult] = useState([]);
+  useEffect(() => {
+    const existList = localStorage.getItem('list');
+    if (existList) {
+      setSearchResult(JSON.parse(existList));
+    }
+  }, []);
+  let [recent, setRecent] = useState(false);
 
   return (
     <div className="App">
@@ -47,11 +56,32 @@ function App() {
         searchInput={searchInput}
         setSearchInput={setSearchInput}
         handleSearchClick={handleSearchClick}
+        recent={recent}
+        setRecent={setRecent}
       />
-
-      {/*로컬스토리지에 검색기록 저장해서 띄울 예정*/}
-      <div>{'최근 검색 단어 : ' + searchResult}</div>
+      {recent ? (
+        <Recent setSearchResult={setSearchResult} searchResult={searchResult} />
+      ) : null}
     </div>
+  );
+}
+
+// 최근 검색 기록창
+function Recent({ setSearchResult, searchResult }) {
+  return (
+    <>
+      <div className="recent__title">
+        <button
+          onClick={() => {
+            localStorage.removeItem('list');
+            setSearchResult([]);
+          }}
+        >
+          전체삭제🗑️
+        </button>
+      </div>
+      <div className="recent__list">{searchResult.join(', ')}</div>
+    </>
   );
 }
 
