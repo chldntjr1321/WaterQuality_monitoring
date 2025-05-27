@@ -11,21 +11,23 @@ body {
   align-items: flex-start;
   text-align: center;
 }
+
 .maintext {
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
 }
+
 .carousel,
 .carousel-inner {
   width: 70vw;
-  height: 400px;
+  height: 600px;
   max-width: 100%;
   margin: 0 auto;
-  overflow: hidden;
+  background-size: cover;
+  /* overflow: hidden; */
 }
-
 .carousel-item {
   width: 100%;
   height: 100%;
@@ -35,22 +37,22 @@ body {
   opacity: 0;
   transition: opacity 0.6s ease-in-out;
 }
-
 .carousel-item.active {
   position: relative; /* 추가: 활성된 슬라이드만 레이아웃에 참여 */
   opacity: 1;
   z-index: 1;
 }
-
+.captiontext {
+  color: black;
+}
 .carousel-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.searchOption {
+.navbtn {
   display: flex;
-  justify-content: center;
-  gap: 90px;
-  margin: 10px;
+  justify-content: flex-end;
+  margin-bottom: 10px;
 }

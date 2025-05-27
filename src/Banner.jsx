@@ -6,7 +6,7 @@ function CarouselFade() {
       <Carousel.Item>
         <img
           className="d-block carousel-img"
-          src="https://picsum.photos/2000/500?random=1"
+          src="src/img/3.jpg"
           alt="First slide"
         />
         <Carousel.Caption>
@@ -17,7 +17,7 @@ function CarouselFade() {
       <Carousel.Item>
         <img
           className="d-block carousel-img"
-          src="https://picsum.photos/2000/500?random=2"
+          src="src/img/2-1.jpg"
           alt="Second slide"
         />
         <Carousel.Caption>

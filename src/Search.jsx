@@ -1,6 +1,12 @@
 import { Navbar, Form, Button, Row, Col } from 'react-bootstrap';
 
 function Search({ searchInput, setSearchInput, handleSearchClick }) {
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault(); //새로고침 방지
+      handleSearchClick();
+    }
+  };
   return (
     <>
       <Navbar style={{ display: 'flex', justifyContent: 'center' }}>
@@ -14,6 +20,7 @@ function Search({ searchInput, setSearchInput, handleSearchClick }) {
                 className=" mr-sm-2"
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
+                onKeyDown={handleKeyDown}
               />
             </Col>
             <Col xs="auto">

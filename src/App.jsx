@@ -26,7 +26,6 @@ function App() {
           historyList.push(searchInput);
           localStorage.setItem('list', JSON.stringify(historyList));
         }
-
         setSearchResult(searchInput);
         setSearchInput('');
       })
@@ -39,11 +38,11 @@ function App() {
 
   return (
     <div className="App">
-      <CarouselFade></CarouselFade>
-      <div className="searchOption">
-        <button>직접 검색하기 🔍</button>
+      <div className="navbtn">
         <button>가나다 순으로 보기 👀</button>
       </div>
+      <CarouselFade></CarouselFade>
+
       <Search
         searchInput={searchInput}
         setSearchInput={setSearchInput}
