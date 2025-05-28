@@ -1,55 +1,25 @@
-import { Navbar, Form, Button, Row, Col } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
+import { SearchBox } from './SearchBox';
+import { SearchResults } from './SearchResults';
+import { fetchCountries } from './countries';
 
-function Search({
-  searchInput,
-  setSearchInput,
-  handleSearchClick,
-  recent,
-  setRecent,
-}) {
+export function Search() {
+  const [query, setQuery] = useState('');
+  const [countries, setCountries] = useState([]);
+  const [searching, setSearching] = useState(false);
+
+  useEffect(() => {
+    setSearching(true);
+    fetchCountries(query).then((countries) => {
+      setCountries(countries);
+      setSearching(false);
+    });
+  }, [query]);
+
   return (
     <>
-      <Navbar
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          margin: '0 0 0 50px',
-        }}
-      >
-        <Form
-          inline
-          onSubmit={(e) => {
-            e.preventDefault(); // 새로고침 방지
-            handleSearchClick();
-          }}
-        >
-          <Row>
-            <Col xs="auto">
-              <Form.Control
-                type="text"
-                placeholder="물과 관련된 궁금한 용어를 검색해보세요!"
-                style={{ width: '450px' }}
-                className=" mr-sm-2"
-                value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
-              />
-            </Col>
-            <Col xs="auto">
-              <Button type="submit">검색</Button>
-            </Col>
-          </Row>
-        </Form>
-        <button
-          className="recentbtn"
-          onClick={() => {
-            recent ? setRecent(false) : setRecent(true);
-          }}
-        >
-          최근 검색🔍
-        </button>
-      </Navbar>
+      <SearchBox value={query} onChange={(e) => setQuery(e.target.value)} />
+      <SearchResults countries={countries} searching={searching} />
     </>
   );
 }
-
-export default Search;

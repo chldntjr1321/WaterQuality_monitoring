@@ -28,7 +28,7 @@ function CarouselFade() {
       <Carousel.Item>
         <img
           className="d-block carousel-img"
-          src="https://picsum.photos/2000/500?random=3?"
+          src="https://picsum.photos/2000/500?random=1?"
           alt="Third slide"
         />
         <Carousel.Caption>
